@@ -1,0 +1,316 @@
+.login .navig {
+height:90.8px ;
+border-bottom: 0.75px solid #efefef;
+display: flex;
+flex-direction: row;
+}
+.login .navig .logoone{
+height:90px ;
+width: 167px;
+position: relative;
+margin-left :3%;
+margin-right: 3%;
+gap:auto;
+float: left;
+    }
+.login .navig .logoone img {
+position: relative;
+height: 100%;
+width: 100%;
+object-fit: cover;
+filter: contrast(900%) brightness(900%) ;
+ }
+   .login .navig .signin {
+   margin-left: auto;
+   margin-right: 45.45px;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+           
+ }
+.login .navig .signin a {
+            color:#333333 ;
+            text-decoration: none;
+            font-size: 19px;
+            font-weight: 630;
+            position: relative;
+          }
+.login  .firstcont {
+                height: 644.8px;
+                width: 100%;
+              
+              padding-top: 5rem;
+              position: relative;
+          }
+.login  .firstcont .insidecont{
+
+    width: 914px;
+    height: 549.8px;
+    padding: 20px 32px 60px 32px;
+    margin: 0 auto 15px auto;
+
+}          
+
+
+.login  .firstcont .insidecont .deepcont {
+ margin: 0 auto  0 auto;
+ height: 445.8px;
+ width:400px  ;
+ font-size: 13px;
+ font-weight: 500;
+ position: relative;
+ border: 0.05px solid black;
+ background-color: rgba(0,0,0,.5);
+ padding: 10px;
+ 
+}
+
+.login  .firstcont .insidecont .deepcont .deepercont {
+    height: 133.4px;
+    width: 100%;
+    margin-top: 20px;
+     
+}
+.login  .firstcont .insidecont .deepcont .deepercont h2 {
+font-size: 32px;
+}
+
+.login  .firstcont .insidecont .deepcont .deepercont .deepestcont{
+height: 46.4px;
+width: 100%;
+position: relative;
+}
+.login  .firstcont .insidecont .deepcont .deepercont .deepestcont span {
+    font-size: 18px;
+    font-weight: 495;
+}
+.login  .firstcont .insidecont .deepcont .deepercont .deepest2cont {
+    height: 130px;
+    width: 100%;
+    margin: 16px 0;
+    position: relative;
+}
+.login  .firstcont .insidecont .deepcont .deepercont .deepest2cont .deepest3cont{
+    height: 60px;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    text-align:left;
+    margin-bottom: 10px;
+}
+.login  .firstcont .insidecont .deepcont .deepercont .deepest2cont .deepest3cont .idiv1{
+font-weight: 480;
+height: 20px;
+width: 100%;
+}
+
+.login  .firstcont .insidecont .deepcont .deepercont .deepest2cont .deepest3cont .idiv2{
+    height: 20px;
+    width: 100%;
+   
+}
+
+.login  .firstcont .insidecont .deepcont .deepercont .deepest2cont .deepest4cont{
+    height: 50px;
+    width: 95%;
+    border-radius: 4px;
+    font-size:16px ;
+   align-items:center;
+   display: flex;
+  font-weight: 450;
+}
+.login  .firstcont .insidecont .deepcont .deepercont  .deepest5cont a{
+font-size: 16px;
+text-decoration: none;
+}
+
+.login  .firstcont .insidecont .deepcont .deepercont  .deepest5cont {
+    margin-bottom: 16px;
+}
+
+.login  .firstcont .insidecont .deepcont .deepercont  .next {
+    height: 55px;
+border: none;
+   
+}
+.login  .firstcont .insidecont .deepcont .deepercont  .next button {
+height: 80% ;
+width: 95% ;
+border-radius: 5px;
+background-color: rgb(154, 247, 41);
+border-color: rgb(154, 247, 41);
+font-size: 24px;
+}
+
+.login  .firstcont .insidecont .deepcont .deepercont  .next button:hover {
+    background-color: rgb(57, 255, 47);
+}
+.login  .footertwo {
+height: 212px ;
+width: 1352.88px;
+padding-top: 30px;
+margin: 0 auto;
+padding-bottom: 20px;
+}
+
+.login  .footertwo p {
+    height: 20px;
+    margin: 0 0 30px;
+color: #737373;
+font-weight: 500;
+}
+
+.login  .footertwo p a {
+    text-decoration:none ;
+    color: #737373;
+font-weight: 500;
+}
+.login  .footertwo ul {
+    height: 64px;
+    width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    padding-left: 0%;
+ 
+     margin: 0;
+}
+
+.login .footertwo ul li {
+    list-style-type: none;
+    height: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #737373;
+    padding-right: 12px;
+    margin-bottom: 16px;
+}
+.login .footertwo button {
+width: 128px;
+height: 48px;
+text-align: center;
+justify-content: center;
+ color: #737373;
+background-color: white;
+border-radius: 4px;
+font-weight: 500;
+display: block;
+}
+.login{
+    background-color: #ffffff;
+}
+@media screen and (max-width :850px){
+    
+
+.login .firstcont .insidecont {
+    margin-left:auto ;
+    margin-right: auto;
+    align-items: center;
+    width: 100%;
+}
+.login .footertwo ul li {
+    width: auto;
+}
+.login .footertwo ul {
+    width: max-content;
+    padding-left: 10px;
+}
+}
+/*.........................................................................loginpage2...................................................................................*/
+.login1 img {
+    height: 947.6px;
+    width: 100%;
+    object-fit:cover;
+  z-index: -1000;
+    position: absolute;
+    background: linear-gradient(black,transparent);
+   filter: brightness(50%);
+   
+}
+.login1{
+    background-color: transparent;
+    
+}
+.logoone1 img{
+z-index: 1000;
+}
+.navig1{
+    z-index: 500;
+    position: relative;
+    border-bottom: none !important;
+}
+.deepcont1{
+     background-color: rgba(0,0,0,.75);
+     padding: 60px 68px 40px ;
+     height: 100% !important;
+     justify-content: center;
+     display:flex;
+
+}
+.insidecont1{
+    padding : 0 32px 0 32px !important;
+    border-bottom: 0  ;
+}
+.firstcont1{
+    border: none !important;
+
+}
+.deepercont1{
+    color: #FFFFFF;
+}
+.deepest4cont1{
+    background-color: #333;
+    border-radius: 6px;
+    border: none;
+   height: 50px !important;
+}
+.deepest3cont1{
+    margin-bottom: 20px !important;
+}
+
+.next1 button {
+    height :50px !important ;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    margin-top: 10px !important;
+}
+.deepest5cont1 a{
+    font-size: 12px !important;
+    color: red;
+}
+
+.footertwo1{
+    background-color: rgba(0,0,0,.75);
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    padding-left: 260px !important;
+    padding-right: 260px !important;
+}
+.btn111{
+    background-color: black !important;
+    border: 1px solid white !important;
+}
+.deepestcont1 span{
+  font-size: 16px !important ;
+  color: #7c7c7c;
+}
+.deepestcont1 span a {
+    font-size: 18px !important ;
+    color: whitesmoke;
+    text-decoration: none;
+    cursor: pointer;
+   
+  }
+  .deepestcont1 span   a:hover  {
+    text-decoration: underline !important;
+   
+  }
+  .deepestcont12 span  {
+    font-size: 13px !important ;
+    color: #7c7c7c;
+  }
+  .deepestcont12 span a  {
+    font-size: 13px !important ;
+  text-decoration: none;
+  }
