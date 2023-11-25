@@ -41,7 +41,7 @@ function handle(event){
   try {
     const response =  await axios.post('http://localhost:8000/datasppp',{email : {userrr} , password : {pass}} );
     if(response.data.message==='found user'){
-      navigate("/homepage");
+      navigate("/");
     }
   else{
     setinpass(true);
@@ -58,7 +58,7 @@ return(
 <div className='login  '>
 <div className='backdrop-opacity-10 z-30 bg-[#171d25] h-20 w-full flex border-b-2 border-b-black pr-40  '>
   <div className='w-24 h-full pl-40 float-left justify-center items-center  flex '>
-  <a href="/homepage" className=' text-6xl float-left  tracking-widest font-bold font-sans subpixel-antialiased text-cyan-300 ' >Ghost</a>
+  <a href="/" className=' text-6xl float-left  tracking-widest font-bold font-sans subpixel-antialiased text-cyan-300 ' >Ghost</a>
   </div>
 </div>
 <div className='absolute w-full '>

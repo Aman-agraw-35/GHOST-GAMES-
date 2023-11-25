@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8000;
 app.use(bodyParser.json());
 app.use(cors());
 
- mongoose.connect("mongodb://127.0.0.1:27017/ghostuser", {useNewUrlParser:true} );
+ mongoose.connect("mongodb+srv://aman:hehe@cluster0.v6ixzty.mongodb.net/ghostuser", {useNewUrlParser:true} );
 
  const userSchema = {
   email: String ,
