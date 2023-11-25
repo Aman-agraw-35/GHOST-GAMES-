@@ -1,4 +1,4 @@
-
+//...........................................................login.............................................................................
 import React, { useEffect ,useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 function Loginpage2(){ 
 
   const [userrr, setUser] = useState(' ');
-    const [inpass , setinpass] = useState(false);
+  const [inpass , setinpass] = useState(false);
     const [learn ,setlearn] =useState(false);
 
  
@@ -33,14 +33,15 @@ function handle(event){
 
  
   async function handleClick(event){
+    event.preventDefault();
     setUser(userrr);
     setpass(pass);
-  event.preventDefault();
+ 
   if(userrr !==  "" && pass !== "" ){
 
   try {
     const response =  await axios.post('http://localhost:8000/datasppp',{email : {userrr} , password : {pass}} );
-    if(response.data.message==='found user'){
+    if(response?.data?.message === 'found user' ){
       navigate("/");
     }
   else{

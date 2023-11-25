@@ -78,11 +78,7 @@ app.get('/p',(req,res) => {
 
 
 
-app.post('/datasppp', (req, res) => {
-if(req.body.mainuser === "")
-  mainuser = '' ;
- }
-)
+
 
 
 app.post('/datasppp', (req, res) => {
@@ -93,12 +89,12 @@ app.post('/datasppp', (req, res) => {
 
 
 
-
  User.findOne({email: userrr.userrr })
   .then((found) => {
    if(found){
-    bcrypt.compare(pass.pass, found.password, function(err, result) {
-      mainuser = found.email ;
+
+    bcrypt.compare( pass.pass ,found.password, function(err, result) {
+    mainuser = found.email ;
     console.log(found.email);
    res.json({ message: 'found user' });
    console.log('user found and authenticated :' + found);

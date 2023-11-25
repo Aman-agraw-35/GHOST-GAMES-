@@ -1,17 +1,14 @@
-
+//..................................................................Signup..................................................................................
 import React, { useEffect ,useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
 function Loginpage1(){ 
 
-    const [user, setUser] = useState('');
-
-    const [truth, settruth] = useState(true);
-
   
-  const [name , setName ] =useState('');
 
+  const [truth, settruth] = useState(true);
+  const [name , setName ] =useState('');
   const [password , setPassword ] =useState('');
   const navigate = useNavigate();
  

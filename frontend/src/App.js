@@ -6,6 +6,8 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import Footer from "./footer";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import{faSpinner} from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [load , setLoad ] =useState(true);
@@ -80,9 +82,9 @@ function App() {
    (load===true)? <div className="w-full h-[100vh] bg-black overflow-hidden bg-center">
 	
 	
-	<video className='w-full h-auto bg-cover flex bg-center ' muted  autoPlay src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4" >
-
+	<video className='w-full h-auto bg-cover flex bg-center absolute' muted  autoPlay src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4#t=2,10" >
 	</video>
+  <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" style={{color: "#fff",position : "relative",left : "745px" , top : "400px", height : "50px" , width: " 50px"}} />
 </div>
  :
     <div className="h-[4260px] w-full bg-[#03080f] scroll-smooth ">
