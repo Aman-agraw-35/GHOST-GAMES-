@@ -58,6 +58,8 @@ function App() {
   const handleDragStart = (e) => e.preventDefault();
 
 
+  
+
 
   const responsive = {
     2000: {
@@ -76,6 +78,7 @@ function App() {
       items: 1,
     },
   };
+
 
   return (
 
