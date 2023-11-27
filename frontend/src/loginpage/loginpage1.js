@@ -34,7 +34,7 @@ function handleChang(event){
   if(name !==  "" && password !== "" ){
 
   try {
-    const response =  await axios.post('https://serverghost-jvow.onrender.com/p/data', {name , password });
+    const response =  await axios.post('https://serverghost-jvow.onrender.com/data', {name , password });
     console.log(response.data.message);
    if(response.data.message === "Alreadyuser"){
     settruth(false);
