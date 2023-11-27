@@ -87,7 +87,7 @@ function App() {
 	
 	<video className='w-full h-auto bg-cover flex bg-center absolute' muted  autoPlay src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4#t=2,10" >
 	</video>
-  <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" style={{color: "#fff",position : "relative",left : "745px" , top : "400px", height : "50px" , width: " 50px"}} />
+  <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" className=" left-[470px] top-[100px] lg:top-[400px] lg:left-[745px] sm:top-[100px] " style={{color: "#fff",position : "relative" , top : "400px", height : "50px" , width: " 50px"}} />
 </div>
  :
     <div className="h-[4260px] w-full bg-[#03080f] scroll-smooth ">
@@ -120,10 +120,12 @@ function App() {
         {(istrue === false)? <div>
             {ist === true?  <div onClick={() => setist(false)} className="  w-max p-2 m-2 mr-8 justify-center items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img className= 'h-12 w-12 cursor-pointer mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div></div> </div>
               
-              : <div className="float-right z-60 bg-[#262d32] w-auto p-2 justify-center mr-[18px] my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
+              : <div className="float-right z-60 bg-[#262d32] w-auto p-2 justify-center mr-[18px] my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div>
+               {/* <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
             
-              {/* <button  className="text-sm text-white " > Logout </button> */}
-            </div></div>} </div>  : <div></div>}
+              <button  className="text-sm text-white " > Logout </button>
+            </div> */}
+            </div>} </div>  : <div></div>}
       </div>
 
       <div className="w-full z-50  h-[100vh]">
