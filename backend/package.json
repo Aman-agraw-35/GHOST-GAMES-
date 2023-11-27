@@ -18,10 +18,6 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
-<<<<<<< HEAD
-=======
-    "express": "^4.18.2",
->>>>>>> c259c3462e7a1bea9c79f93a16441d557272ee7c
     "lodash": "^4.17.21",
     "mongoose": "^7.5.2",
     "express": "^4.18.2"

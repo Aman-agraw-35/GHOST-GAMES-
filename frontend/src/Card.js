@@ -10,7 +10,7 @@ function Card(props){
 
      async function handleClick(){
       setId(props.id );
-       await axios.post('http://localhost:8000/datas', {id} );
+       await axios.post('https://serverghost-jvow.onrender.com/datas', {id} );
        if(id !== ""){
       navigate('/game');
        }

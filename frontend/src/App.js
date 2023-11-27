@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/filter")
+      .get("https://serverghost-jvow.onrender.com/api/filter")
       .then((response) => {
         setPage1(response.data);
       })
@@ -39,7 +39,7 @@ function App() {
 
  
 
-    axios.get('http://localhost:8000/p')
+    axios.get('https://serverghost-jvow.onrender.com/p')
       .then((response) => {
         console.log(mainUser);
         setMainuser(response.data);
