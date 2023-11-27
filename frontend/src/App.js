@@ -87,7 +87,7 @@ function App() {
 	
 	<video className='w-full h-auto bg-cover flex bg-center absolute' muted  autoPlay src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4#t=2,10" >
 	</video>
-  <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" className=" left-[470px] top-[00px] lg:top-[400px] lg:left-[745px] sm:top-[100px] " style={{color: "#fff",position : "relative" , top : "400px", height : "50px" , width: " 50px"}} />
+  <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" className=" left-[470px] top-[200px] lg:top-[400px] lg:left-[745px] " style={{color: "#fff",position : "relative" , height : "50px" , width: " 50px"}} />
 </div>
  :
     <div className="h-[4260px] w-full bg-[#03080f] scroll-smooth ">
