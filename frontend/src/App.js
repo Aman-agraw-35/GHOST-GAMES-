@@ -122,7 +122,7 @@ function App() {
               
               : <div className="float-right z-60 bg-[#262d32] w-auto p-2 justify-center mr-[18px] my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
             
-              <button  className="text-sm text-white " > Logout </button>
+              {/* <button  className="text-sm text-white " > Logout </button> */}
             </div></div>} </div>  : <div></div>}
       </div>
 
