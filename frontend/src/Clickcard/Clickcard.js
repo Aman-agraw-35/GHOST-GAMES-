@@ -10,7 +10,7 @@ function Clickcard(){
       const [page, setPage] = useState([]);
 
       useEffect(() => {
-        axios.get('https://serverghost-jvow.onrender.com/api')
+        axios.get('https://ghost-games-3.onrender.com/api')
           .then(response => {
             setPage(response.data);
           })
