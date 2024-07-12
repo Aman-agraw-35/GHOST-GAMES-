@@ -23,7 +23,7 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-  }, [page1]);
+  }, []);
 
   setTimeout(function(){
     setLoad(false);
