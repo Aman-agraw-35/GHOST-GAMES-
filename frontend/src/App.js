@@ -23,7 +23,7 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-  }, [page1]);
+  }, []);
 
   setTimeout(function(){
     setLoad(false);
@@ -82,7 +82,7 @@ function App() {
 
   return (
 
-   (load===true)? <div className="w-full h-[100vh] bg-black overflow-hidden bg-center">
+   (load===true)? <div className="w-full h-[100vh] bg-[#2e1351] overflow-hidden bg-center">
 	
 	
 	<video className='w-full h-auto bg-cover flex bg-center absolute' muted  autoPlay src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4#t=2,10" >
@@ -90,7 +90,7 @@ function App() {
   <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" className=" left-[470px] top-[200px] lg:top-[400px] lg:left-[745px] " style={{color: "#fff",position : "relative" , height : "50px" , width: " 50px"}} />
 </div>
  :
-    <div className="h-[4260px] w-full bg-[#03080f] scroll-smooth ">
+    <div className="h-[4260px] w-full bg-[#2e1351]  scroll-smooth ">
       <div className="relative  backdrop-opacity-10 z-30 bg-[#171d25] h-20 w-full flex border-b-2 border-b-black ">
         <div className="w-24 h-full pl-32 float-left justify-center items-center  flex ">
           <a href="#" className="text-5xl  xl:text-6xl float-left  tracking-widest font-bold font-sans subpixel-antialiased text-cyan-300" > Ghost </a>
@@ -120,7 +120,7 @@ function App() {
         {(istrue === false)? <div>
             {ist === true?  <div onClick={() => setist(false)} className="  w-max p-2 px-4 m-2 mr-8 justify-center items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img className= 'h-12 w-12 cursor-pointer mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div></div> </div>
               
-              : <div className="float-right z-60 bg-[#262d32] w-max p-2 px-4 mr-12 justify-center  my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
+              : <div className="float-right z-60 bg-[#2e1351]  w-max p-2 px-4 mr-12 justify-center  my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
             
               {/* <button  className="text-sm text-white " > Logout </button> */}
             </div></div>} </div>  : <div></div>}
@@ -130,7 +130,7 @@ function App() {
         <div className="absolute z-20 w-full h-full bg-[rgba(0,0,0,.44)]"></div>
         <img
           className="absolute z-10 object-fill w-full h-full"
-          src="https://wallpapers.com/images/featured/pc-gaming-background-zvbj1ryoiptz09af.jpg"
+          src="https://wallpapers.com/images/hd/3840-x-1080-gaming-8z2jwjo8i0zpjlxo.jpg"
           alt="bg img"
         />
 
@@ -158,7 +158,7 @@ function App() {
             
    
          
-          <div className="mb-20 h-11 justify-center flex w-full ">
+          {/* <div className="mb-20 h-11 justify-center flex w-full ">
             <div className="w-3/4  border-2 rounded-lg flex flex-row  items-center pl-3 bg-[rgba(120,120,120,0.5)] border-[#242424] h-full">
               <Search color="#8c929d" />
               <input
@@ -166,9 +166,9 @@ function App() {
                 placeholder="Search 488,835 games"
               ></input>
             </div>
-          </div>
+          </div> */}
 
-          <div className="h-17 pb-4 w-full">
+          <div className="h-17 pb-4 pt-4 w-full">
             <h1 className="  text-3xl md:text-5xl text-[#AAC8A7] font-extrabold ">
               {" "}
               POPULAR GAMES{" "}
@@ -421,7 +421,7 @@ function App() {
               SPORTS
             </h1>
           </div>
-             <div className="bg-[#03080f] h-310">
+             <div className="bg-[#2e1351]  h-310">
           {page1.length > 0 && (
             <div
               onDragStart={handleDragStart}
