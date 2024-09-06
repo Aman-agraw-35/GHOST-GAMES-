@@ -4,12 +4,20 @@ import cors from "cors";
 import axios from 'axios';
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-
+import path from "path";
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(bodyParser.json());
 app.use(cors());
+const __dirname = path.resolve();
+
+ app.use(express.static(path.join(__dirname,"../frontend/build")));
+
+app.get("*", (req,res)=>{
+     res.sendFile(path.join(__dirname,"../frontend/build/index.html"));
+ })
+
 
  mongoose.connect("mongodb+srv://aman:hehe@cluster0.v6ixzty.mongodb.net/ghostuser", {useNewUrlParser:true} );
 

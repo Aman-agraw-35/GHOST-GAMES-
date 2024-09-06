@@ -82,7 +82,7 @@ function App() {
 
   return (
 
-   (load===true)? <div className="w-full h-[100vh] bg-[#2e1351] overflow-hidden bg-center">
+   (load===true)? <div className="w-full h-[100vh] bg-[#black] overflow-hidden bg-center">
 	
 	
 	<video className='w-full h-auto bg-cover flex bg-center absolute' muted  autoPlay src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4#t=2,10" >
@@ -91,7 +91,7 @@ function App() {
 </div>
  :
     <div className="h-[4260px] w-full bg-[#2e1351]  scroll-smooth ">
-      <div className="relative  backdrop-opacity-10 z-30 bg-[#171d25] h-20 w-full flex border-b-2 border-b-black ">
+      <div className="relative   backdrop-opacity-10 z-30 bg-[#171d25] h-20 w-full flex border-b-2 border-b-black ">
         <div className="w-24 h-full pl-32 float-left justify-center items-center  flex ">
           <a href="#" className="text-5xl  xl:text-6xl float-left  tracking-widest font-bold font-sans subpixel-antialiased text-cyan-300" > Ghost </a>
         </div >
@@ -120,10 +120,9 @@ function App() {
         {(istrue === false)? <div>
             {ist === true?  <div onClick={() => setist(false)} className="  w-max p-2 px-4 m-2 mr-8 justify-center items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img className= 'h-12 w-12 cursor-pointer mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div></div> </div>
               
-              : <div className="float-right z-60 bg-[#2e1351]  w-max p-2 px-4 mr-12 justify-center  my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
+              : <div className="float-right z-60 bg-[#373e3d]  w-max p-2 px-4 mr-12 justify-center  my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
             
-              {/* <button  className="text-sm text-white " > Logout </button> */}
-            </div></div>} </div>  : <div></div>}
+            </div></div>} </div>  : <div><div className="w-max p-2 px-4 m-2 mr-8 justify-center items-center border-1 border-black rounded-lg mb-4 flex flex-col"></div></div>}
       </div>
 
       <div className="w-full z-50  h-[100vh]">
@@ -134,8 +133,8 @@ function App() {
           alt="bg img"
         />
 
- <div className="w-full h-[100vh] z-30 relative  px-28  pt-8 ">
- {istrue === true ? <div className="h-auto w-auto flex float-right text-[#4fd2e3] text-xl justify-center items-center pb-8 ">
+ <div className="w-full h-[100vh] z-30 relative items-center  px-28  pt-8 ">
+ {istrue === true ? <div className="h-auto w-auto flex text-[#4fd2e3] text-xl justify-center items-center pb-8 ">
             <div className=" mr-5  px-1.5 font-semibold rounded-md border-2 border-cyan-300 #8c929d hover:bg-[rgba(120,120,120,0.2)]">
               <button
                 onClick={(x) => {
@@ -158,15 +157,15 @@ function App() {
             
    
          
-          {/* <div className="mb-20 h-11 justify-center flex w-full ">
-            <div className="w-3/4  border-2 rounded-lg flex flex-row  items-center pl-3 bg-[rgba(120,120,120,0.5)] border-[#242424] h-full">
+          <div className="mb-20 h-11 justify-center flex w-full ">
+            {/* <div className="w-3/4  border-2 rounded-lg flex flex-row  items-center pl-3 bg-[rgba(120,120,120,0.5)] border-[#242424] h-full">
               <Search color="#8c929d" />
               <input
                 className="h-full w-full text-white  bg-transparent placeholder:italic text-[whi] ml-2 pl-2 "
                 placeholder="Search 488,835 games"
               ></input>
-            </div>
-          </div> */}
+            </div> */}
+          </div>
 
           <div className="h-17 pb-4 pt-4 w-full">
             <h1 className="  text-3xl md:text-5xl text-[#AAC8A7] font-extrabold ">
