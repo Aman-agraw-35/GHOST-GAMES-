@@ -42,8 +42,10 @@ function App() {
     axios.get('https://ghost-games-3.onrender.com/p')
     .then((response) => {
       console.log(mainUser);
+      console.log("mainuser :" + response.data);
+
       setMainuser(response.data);
-      console.log(mainUser);
+      console.log("mainuser :" + mainUser);
       if(mainUser !== ""){
         setistrue(false);
       }else{
