@@ -14,6 +14,11 @@ function App() {
   const [loadingCards, setLoadingCards] = useState(true);
   const [page1, setPage1] = useState(true);
   let dataUser ="" ;
+
+
+
+
+
   useEffect(() => {
     axios
       .get("https://ghost-games-dbup.vercel.app/api/filter")
@@ -116,12 +121,12 @@ const placeholderCards = Array.from({ length: 12 }, (_, index) => (
 
   return (
 
-   (load===true)? <div className="w-full h-[100vh] bg-[#2e1351] overflow-hidden bg-center">
+   (load===true)? <div className="w-full h-[100vh] bg-black overflow-hidden bg-center">
 	
 	
-	<video className='w-full h-auto bg-cover flex bg-center absolute' muted  autoPlay src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4#t=2,10" >
+	<video className='w-full h-full  bg-cover object-fill flex bg-center absolute' muted  autoPlay src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4#t=2,10" >
 	</video>
-  <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" className=" left-[470px] top-[200px] lg:top-[400px] lg:left-[745px] " style={{color: "#fff",position : "relative" , height : "50px" , width: " 50px"}} />
+  <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" className="left-[50%] top-[50%]" style={{color: "#fff",position : "relative" , height : "50px" , width: " 50px"}} />
 </div>
  :
     <div className="h-[4260px] w-full bg-[#2e1351]  scroll-smooth ">
