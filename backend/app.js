@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = 8000;
 
 app.use(bodyParser.json());
 app.use(cors());
