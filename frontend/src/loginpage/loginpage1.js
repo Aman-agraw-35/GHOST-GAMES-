@@ -72,12 +72,12 @@ return(
  
         <div className='idiv2' >
    
-        <input type="text"  className='deepest4cont deepest4cont1 bg-[rgba(0,0,0,0.5)] text-yellow-300 pl-3 #8C8C8C ' placeholder='Username or Email' onChange={handleChange}></input>
+        <input type="Email"  className='deepest4cont deepest4cont1 bg-[rgba(0,0,0,0.5)] text-yellow-300 pl-3 #8C8C8C ' placeholder='Email' onChange={handleChange}></input>
         </div>
     </div>
  
   <div>
-    <input type="password" className='deepest4cont deepest4cont1 bg-[rgba(0,0,0,0.5)]  text-yellow-300 pl-3 #8C8C8C ' placeholder='Create a password' onChange={handleChang}></input>
+    <input type="password" minLength={8} className='deepest4cont deepest4cont1 bg-[rgba(0,0,0,0.5)]  text-yellow-300 pl-3 #8C8C8C ' placeholder='Create a password' onChange={handleChang}></input>
 </div>
 <div className="deepest5cont">
 <a href="/login" className=' text-red-300'>Already a user ?</a>
