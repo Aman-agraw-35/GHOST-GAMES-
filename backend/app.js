@@ -4,7 +4,7 @@ import cors from "cors";
 import axios from 'axios';
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-
+import path from "path";
 const app = express();
 const PORT = process.env.PORT || 8000;
 
