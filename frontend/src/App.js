@@ -38,26 +38,24 @@ function App() {
 
   const [ist, setist] = useState(true);
 
-
-    axios.get('https://ghost-games-3.onrender.com/p')
-    .then((response) => {
-      console.log(mainUser);
-
-      setMainuser(response.data.name);
-      console.log("mainuser :" + mainUser);
-      if(mainUser !== ""){
-        setistrue(false);
-      }else{
-        setistrue(true);
-      }
-    
-    })
-    .catch((error) => {
-      console.error('Error retrieving data:', error);
-    });
-  
-  
  
+
+    axios.get('https://ghost-games-dbup.vercel.app/p')
+      .then((response) => {
+        console.log(mainUser);
+        setMainuser(response.data);
+        if(mainUser !== ""){
+          setistrue(false);
+        }else{
+          setistrue(true);
+        }
+      
+      })
+      .catch((error) => {
+        console.error('Error retrieving data:', error);
+      });
+   
+
   const handleDragStart = (e) => e.preventDefault();
 
 const placeholderCards = Array.from({ length: 12 }, (_, index) => (
