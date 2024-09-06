@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Search } from "lucide-react";
 import Card from "./Card";
 import axios from "axios";
 import AliceCarousel from "react-alice-carousel";
@@ -12,18 +11,20 @@ import{faSpinner} from '@fortawesome/free-solid-svg-icons';
 function App() {
   const [load , setLoad ] =useState(true);
   const navigate = useNavigate();
+  const [loadingCards, setLoadingCards] = useState(true);
   const [page1, setPage1] = useState([]);
-
+  
   useEffect(() => {
     axios
       .get("https://ghost-games-3.onrender.com/api/filter")
       .then((response) => {
         setPage1(response.data);
+        setLoadingCards(false); 
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  });
 
   setTimeout(function(){
     setLoad(false);
@@ -57,8 +58,38 @@ function App() {
 
   const handleDragStart = (e) => e.preventDefault();
 
-
-  
+const placeholderCards = Array.from({ length: 12 }, (_, index) => (
+  <div
+    key={index}
+    className="h-[300px] w-[304px] hover:scale-95 rounded-t-lg hover:z-60 z-10 rounded-b-lg mr-3 bg-[#242424] flex flex-col cursor-pointer animate-pulse"
+  >
+    {/* Image Placeholder */}
+    <div className="h-[169px] w-[304px] bg-gray-600 rounded-t-lg"></div>
+    
+    {/* Content Placeholder */}
+    <div className="w-[304px] h-[131px] py-0.5 px-1.5 flex flex-col justify-between">
+      <div className="w-full">
+        {/* Rating Placeholder */}
+        <div className="w-20 h-4 bg-gray-500 rounded float-right mt-1"></div>
+      </div>
+      
+      {/* Title Placeholder */}
+      <div className="h-6 bg-gray-500 rounded w-3/4 my-1"></div>
+      
+      <div className="absolute bottom-1">
+        {/* Platform & Free Placeholder */}
+        <div className="flex flex-row gap-3">
+          <div className="h-4 w-16 bg-gray-500 rounded"></div>
+          <div className="h-4 w-10 bg-gray-500 rounded"></div>
+        </div>
+        
+        {/* Released & Developer Placeholders */}
+        <div className="h-4 w-32 bg-gray-500 rounded mt-1"></div>
+        <div className="h-4 w-40 bg-gray-500 rounded mt-1"></div>
+      </div>
+    </div>
+  </div>
+));
 
 
   const responsive = {
@@ -175,32 +206,37 @@ function App() {
             </h1>
           </div>
 
-          {page1.length > 0 && (
-            <div
-              onDragStart={handleDragStart}
-          
-              role="presentation"
-              className="h-[299px] w-full justify-center flex mr-5 mb-28"
-              onChange={handleDragStart}
-            >
-              <AliceCarousel
-                mouseTracking
-                responsive={responsive}
-         
-                items={page1.slice(0, 30).map((data) => (
-                  <Card
-                    name={data.title}
-                    img={data.thumbnail}
-                    id={data.id}
-                    released={data.release_date}
-                    rating={data.genre}
-                    publisher={data.developer}
-                    platform={data.platform}
-                  />
-                ))}
-              />
-            </div>
-          )}
+          {loadingCards ? (
+  <div className="h-[299px] w-full justify-center flex mr-5 mb-28">
+    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
+  </div>
+) : (
+  page1.length > 0 && (
+    <div
+      onDragStart={handleDragStart}
+      role="presentation"
+      className="h-[299px] w-full justify-center flex mr-5 mb-28"
+    >
+      <AliceCarousel
+        mouseTracking
+        responsive={responsive}
+        items={page1.slice(0, 12).map((data) => (
+          <Card
+            key={data.id} // Always include a unique key for the mapped items
+            name={data.title}
+            img={data.thumbnail}
+            id={data.id}
+            released={data.release_date}
+            rating={data.genre}
+            publisher={data.developer}
+            platform={data.platform}
+          />
+        ))}
+      />
+    </div>
+  )
+)}
+
 
           <div className="h-17 pb-4 w-full">
             <h1 className=" text-3xl md:text-5xl  text-[#AAC8A7] font-extrabold pt-6">
@@ -208,31 +244,38 @@ function App() {
             </h1>
           </div>
 
-          {page1.length > 0 && (
-            <div
-              onDragStart={handleDragStart}
-              role="presentation"
-              className="h-[299px] w-full flex mr-5 mb-28"
-            >
-              <AliceCarousel
-                mouseTracking
-                responsive={responsive}
-                preventDefault
-            
-                items={page1.slice(31, 60).map((data) => (
-                  <Card
-                    name={data.title}
-                    img={data.thumbnail}
-                    id={data.id}
-                    released={data.release_date}
-                    rating={data.genre}
-                    publisher={data.developer}
-                    platform={data.platform}
-                  />
-                ))}
-              />
-            </div>
-          )}
+          {loadingCards ? (
+  <div className="h-[299px] w-full justify-center flex mr-5 mb-28">
+    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
+  </div>
+) : (
+  page1.length > 0 && (
+    <div
+      onDragStart={handleDragStart}
+      role="presentation"
+      className="h-[299px] w-full flex mr-5 mb-28"
+    >
+      <AliceCarousel
+        mouseTracking
+        responsive={responsive}
+        preventDefault
+        items={page1.slice(13, 24).map((data) => (
+          <Card
+            key={data.id}
+            name={data.title}
+            img={data.thumbnail}
+            id={data.id}
+            released={data.release_date}
+            rating={data.genre}
+            publisher={data.developer}
+            platform={data.platform}
+          />
+        ))}
+      />
+    </div>
+  )
+)}
+
 
           <div className="h-17 pb-4 w-full">
             <h1 className="   text-3xl md:text-5xl text-[#AAC8A7] font-extrabold pt-6 ">
@@ -240,30 +283,38 @@ function App() {
             </h1>
           </div>
 
-          {page1.length > 0 && (
-            <div
-              onDragStart={handleDragStart}
-              role="presentation"
-              className="h-[299px] w-full flex mr-5 mb-28"
-            >
-              <AliceCarousel
-                mouseTracking
-                responsive={responsive}
-                preventDefault
-                items={page1.slice(61, 90).map((data) => (
-                  <Card
-                    name={data.title}
-                    img={data.thumbnail}
-                    id={data.id}
-                    released={data.release_date}
-                    rating={data.genre}
-                    publisher={data.developer}
-                    platform={data.platform}
-                  />
-                ))}
-              />
-            </div>
-          )}
+          {loadingCards ? (
+  <div className="h-[299px] w-full justify-center flex mr-5 mb-28">
+    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
+  </div>
+) : (
+  page1.length > 0 && (
+    <div
+      onDragStart={handleDragStart}
+      role="presentation"
+      className="h-[299px] w-full flex mr-5 mb-28"
+    >
+      <AliceCarousel
+        mouseTracking
+        responsive={responsive}
+        preventDefault
+        items={page1.slice(25, 36).map((data) => (
+          <Card
+            key={data.id}
+            name={data.title}
+            img={data.thumbnail}
+            id={data.id}
+            released={data.release_date}
+            rating={data.genre}
+            publisher={data.developer}
+            platform={data.platform}
+          />
+        ))}
+      />
+    </div>
+  )
+)}
+
 
           <div className="h-17 pb-4 w-full">
             <h1 className="   text-3xl md:text-5xl  text-[#AAC8A7] font-extrabold pt-6">
@@ -271,30 +322,38 @@ function App() {
             </h1>
           </div>
 
-          {page1.length > 0 && (
-            <div
-              onDragStart={handleDragStart}
-              role="presentation"
-              className="h-[299px] w-full items-center flex mr-5 mb-28"
-            >
-              <AliceCarousel
-                mouseTracking
-                responsive={responsive}
-                preventDefault
-                items={page1.slice(91, 120).map((data) => (
-                  <Card
-                    name={data.title}
-                    img={data.thumbnail}
-                    id={data.id}
-                    released={data.release_date}
-                    rating={data.genre}
-                    publisher={data.developer}
-                    platform={data.platform}
-                  />
-                ))}
-              />
-            </div>
-          )}
+          {loadingCards ? (
+  <div className="h-[299px] w-full items-center flex mr-5 mb-28">
+    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
+  </div>
+) : (
+  page1.length > 0 && (
+    <div
+      onDragStart={handleDragStart}
+      role="presentation"
+      className="h-[299px] w-full items-center flex mr-5 mb-28"
+    >
+      <AliceCarousel
+        mouseTracking
+        responsive={responsive}
+        preventDefault
+        items={page1.slice(100, 120).map((data) => (
+          <Card
+            key={data.id}
+            name={data.title}
+            img={data.thumbnail}
+            id={data.id}
+            released={data.release_date}
+            rating={data.genre}
+            publisher={data.developer}
+            platform={data.platform}
+          />
+        ))}
+      />
+    </div>
+  )
+)}
+
 
           <div className="h-17 pb-4 w-full">
             <h1
@@ -305,35 +364,41 @@ function App() {
             </h1>
           </div>
 
-          {page1.length > 0 && (
-            <div
-              onDragStart={handleDragStart}
-              role="presentation"
-              className="h-[299px] w-full flex mr-5 mb-28"
-            >
-              <AliceCarousel
-                mouseTracking
-                responsive={responsive}
-                preventDefault
-                items={page1
-                  .filter((data) => {
-                    return data.genre === "Shooter";
-                  })
-                  .slice(0, 100)
-                  .map((data) => (
-                    <Card
-                      name={data.title}
-                      img={data.thumbnail}
-                      id={data.id}
-                      released={data.release_date}
-                      rating={data.genre}
-                      publisher={data.developer}
-                      platform={data.platform}
-                    />
-                  ))}
-              />
-            </div>
-          )}
+          {loadingCards ? (
+  <div className="h-[299px] w-full flex mr-5 mb-28">
+    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
+  </div>
+) : (
+  page1.length > 0 && (
+    <div
+      onDragStart={handleDragStart}
+      role="presentation"
+      className="h-[299px] w-full flex mr-5 mb-28"
+    >
+      <AliceCarousel
+        mouseTracking
+        responsive={responsive}
+        preventDefault
+        items={page1
+          .filter((data) => data.genre === "Shooter")
+          .slice(0, 20)
+          .map((data) => (
+            <Card
+              key={data.id}
+              name={data.title}
+              img={data.thumbnail}
+              id={data.id}
+              released={data.release_date}
+              rating={data.genre}
+              publisher={data.developer}
+              platform={data.platform}
+            />
+          ))}
+      />
+    </div>
+  )
+)}
+
 
           <div className="h-17 pb-4 w-full">
             <h1
@@ -344,35 +409,41 @@ function App() {
             </h1>
           </div>
 
-          {page1.length > 0 && (
-            <div
-              onDragStart={handleDragStart}
-              role="presentation"
-              className="h-[299px] w-full flex mr-5 mb-28"
-            >
-              <AliceCarousel
-                mouseTracking
-                responsive={responsive}
-                preventDefault
-                items={page1
-                  .filter((data) => {
-                    return data.genre === "Card Game";
-                  })
-                  .slice(0, 100)
-                  .map((data) => (
-                    <Card
-                      name={data.title}
-                      img={data.thumbnail}
-                      id={data.id}
-                      released={data.release_date}
-                      rating={data.genre}
-                      publisher={data.developer}
-                      platform={data.platform}
-                    />
-                  ))}
-              />
-            </div>
-          )}
+          {loadingCards ? (
+  <div className="h-[299px] w-full flex mr-5 mb-28">
+    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
+  </div>
+) : (
+  page1.length > 0 && (
+    <div
+      onDragStart={handleDragStart}
+      role="presentation"
+      className="h-[299px] w-full flex mr-5 mb-28"
+    >
+      <AliceCarousel
+        mouseTracking
+        responsive={responsive}
+        preventDefault
+        items={page1
+          .filter((data) => data.genre === "Card Game")
+          .slice(0, 15)
+          .map((data) => (
+            <Card
+              key={data.id}
+              name={data.title}
+              img={data.thumbnail}
+              id={data.id}
+              released={data.release_date}
+              rating={data.genre}
+              publisher={data.developer}
+              platform={data.platform}
+            />
+          ))}
+      />
+    </div>
+  )
+)}
+
 
           <div className="h-17 pb-4 w-full">
             <h1
@@ -383,35 +454,41 @@ function App() {
             </h1>
           </div>
          
-          {page1.length > 0 && (
-            <div
-              onDragStart={handleDragStart}
-              role="presentation"
-              className="h-[299px] w-full flex mr-5 mb-28"
-            >
-              <AliceCarousel
-                mouseTracking
-                responsive={responsive}
-                preventDefault
-                items={page1
-                  .filter((data) => {
-                    return data.genre === "Battle Royale";
-                  })
-                  .slice(0, 130)
-                  .map((data) => (
-                    <Card
-                      name={data.title}
-                      img={data.thumbnail}
-                      id={data.id}
-                      released={data.release_date}
-                      rating={data.genre}
-                      publisher={data.developer}
-                      platform={data.platform}
-                    />
-                  ))}
-              />
-            </div>
-          )}
+          {loadingCards ? (
+  <div className="h-[299px] w-full flex mr-5 mb-28">
+    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
+  </div>
+) : (
+  page1.length > 0 && (
+    <div
+      onDragStart={handleDragStart}
+      role="presentation"
+      className="h-[299px] w-full flex mr-5 mb-28"
+    >
+      <AliceCarousel
+        mouseTracking
+        responsive={responsive}
+        preventDefault
+        items={page1
+          .filter((data) => data.genre === "Battle Royale")
+          .slice(0, 19)
+          .map((data) => (
+            <Card
+              key={data.id}
+              name={data.title}
+              img={data.thumbnail}
+              id={data.id}
+              released={data.release_date}
+              rating={data.genre}
+              publisher={data.developer}
+              platform={data.platform}
+            />
+          ))}
+      />
+    </div>
+  )
+)}
+
 
           <div className="h-17 pb-4 w-full">
             <h1
@@ -422,37 +499,41 @@ function App() {
             </h1>
           </div>
              <div className="bg-[#2e1351]  h-310">
-          {page1.length > 0 && (
-            <div
-              onDragStart={handleDragStart}
-              role="presentation"
-              className="h-[299px] w-full flex mr-5 mb-28"
-            >
-              <AliceCarousel
-                mouseTracking
-                responsive={responsive}
-                preventDefault
-                items={page1
-                  .filter((data) => {
-                    return data.genre === "Sports";
-                  })
-                  .slice(0, 130)
-                  .map((data) => (
-                    <Card
-                      name={data.title}
-                      img={data.thumbnail}
-                      id={data.id}
-                      released={data.release_date}
-                      rating={data.genre}
-                      publisher={data.developer}
-                      platform={data.platform}
-                    />
-                  ))}
-              />
-             
-            </div>
-            
-          )}
+             {loadingCards ? (
+  <div className="h-[299px] w-full flex mr-5 mb-28">
+    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
+  </div>
+) : (
+  page1.length > 0 && (
+    <div
+      onDragStart={handleDragStart}
+      role="presentation"
+      className="h-[299px] w-full flex mr-5 mb-28"
+    >
+      <AliceCarousel
+        mouseTracking
+        responsive={responsive}
+        preventDefault
+        items={page1
+          .filter((data) => data.genre === "Sports")
+          .slice(0, 20)
+          .map((data) => (
+            <Card
+              key={data.id}
+              name={data.title}
+              img={data.thumbnail}
+              id={data.id}
+              released={data.release_date}
+              rating={data.genre}
+              publisher={data.developer}
+              platform={data.platform}
+            />
+          ))}
+      />
+    </div>
+  )
+)}
+
              <Footer/>
        </div>
         </div>
