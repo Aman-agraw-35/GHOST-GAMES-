@@ -10,7 +10,7 @@ function Card(props){
 
      async function handleClick(){
       setId(props.id );
-       await axios.post('https://ghost-games-3.onrender.com/datas', {id} );
+       await axios.post('https://ghost-games-dbup.vercel.app/datas', {id} );
        if(id !== ""){
       navigate('/game');
        }

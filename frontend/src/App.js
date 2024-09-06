@@ -16,7 +16,7 @@ function App() {
   
   useEffect(() => {
     axios
-      .get("https://ghost-games-3.onrender.com/api/filter")
+      .get("https://ghost-games-dbup.vercel.app/api/filter")
       .then((response) => {
         setPage1(response.data);
         setLoadingCards(false); 
@@ -40,7 +40,7 @@ function App() {
 
  
 
-    axios.get('https://ghost-games-3.onrender.com/p')
+    axios.get('https://ghost-games-dbup.vercel.app/p')
       .then((response) => {
         console.log(mainUser);
         setMainuser(response.data);
