@@ -13,7 +13,7 @@ root.render(
   <BrowserRouter>
   <Routes>
     <Route path="/" element={<App3 />} />
-      <Route path="/game" element={<App2 />} />
+      <Route path="/" element={<App2 />} />
       <Route path="/signup" element={<Loginpage1/>} />
       <Route path="/login" element={<Loginpage2 />} />
   </Routes>
