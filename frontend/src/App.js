@@ -13,7 +13,6 @@ function App() {
   const navigate = useNavigate();
   const [loadingCards, setLoadingCards] = useState(true);
   const [page1, setPage1] = useState(true);
-  let dataUser ="" ;
 
 
 
@@ -47,10 +46,9 @@ function App() {
     useEffect(() => {
     axios.get('https://ghost-games-dbup.vercel.app/p')
       .then((response) => {
-        dataUser = response.data ;
 
-        setMainuser(dataUser);
-        console.log(mainUser);
+        setMainuser(response.data);
+        console.log("eeeeee"  + mainUser);
 
         if(mainUser !== ""){
           setistrue(false);
@@ -64,13 +62,7 @@ function App() {
       });
     }, []) ; 
 
-    useEffect(() => {
-      if(mainUser !== ""){
-        setistrue(false);
-      }else{
-        setistrue(true);
-      }
-    });
+
 
   const handleDragStart = (e) => e.preventDefault();
 
