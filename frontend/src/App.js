@@ -47,7 +47,7 @@ function App() {
     useEffect(() => {
     axios.get('https://ghost-games-dbup.vercel.app/p')
       .then((response) => {
-        dataUser = response.data ;
+        dataUser = response?.data ;
 
         setMainuser(dataUser);
         console.log(mainUser);
@@ -58,11 +58,11 @@ function App() {
           setistrue(true);
         }
       
-      },[mainUser])
+      })
       .catch((error) => {
         console.error('Error retrieving data:', error);
       });
-    }, [mainUser]) ; 
+    }, []) ; 
 
   const handleDragStart = (e) => e.preventDefault();
 
