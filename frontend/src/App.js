@@ -62,7 +62,7 @@ function App() {
       .catch((error) => {
         console.error('Error retrieving data:', error);
       });
-    }, []) ; 
+    }, [mainUser]) ; 
 
   const handleDragStart = (e) => e.preventDefault();
 
@@ -156,19 +156,13 @@ const placeholderCards = Array.from({ length: 12 }, (_, index) => (
             </a>
           </div>
         </div>
-
-
-
-        
         {(istrue === false)? <div>
             {ist === true?  <div onClick={() => setist(false)} className="  w-max p-2 px-4 m-2 mr-8 justify-center items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img loading="lazy" className= 'h-12 w-12 cursor-pointer mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div></div> </div>
               
-              : <div className="float-right  bg-[#222023c0] z-10  w-max p-2 px-4 mr-12 justify-center  my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img  loading="lazy"onClick={() => setist(true)} className= 'h-12 cursor-pointer z-10 w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
+              : <div className="float-right z-60 bg-[#222023c0]  w-max p-2 px-4 mr-12 justify-center  my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img  loading="lazy"onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
             
               {/* <button  className="text-sm text-white " > Logout </button> */}
             </div></div>} </div>  : <div></div>}
-
-            
       </div>
 
       <div className="w-full z-50  h-[100vh]">
