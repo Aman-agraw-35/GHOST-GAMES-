@@ -43,25 +43,20 @@ function App() {
   const [ist, setist] = useState(true);
 
  
-    useEffect(() => {
-    axios.get('https://ghost-games-dbup.vercel.app/p')
-      .then((response) => {
-
-        setMainuser(response.data);
-        console.log("eeeeee"  + mainUser);
-
-        if(mainUser !== ""){
-          setistrue(false);
-        }else{
-          setistrue(true);
-        }
-      
-      },[])
-      .catch((error) => {
-        console.error('Error retrieving data:', error);
-      });
-    }, []) ; 
-
+  axios.get('https://ghost-games-3.onrender.com/p')
+  .then((response) => {
+    console.log(mainUser);
+    setMainuser(response.data);
+    if(mainUser !== ""){
+      setistrue(false);
+    }else{
+      setistrue(true);
+    }
+  
+  })
+  .catch((error) => {
+    console.error('Error retrieving data:', error);
+  });
 
 
   const handleDragStart = (e) => e.preventDefault();
