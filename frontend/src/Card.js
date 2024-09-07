@@ -28,7 +28,7 @@ return(
    <div  onClick={ handleClick} className='h-[300px] w-[304px] hover:scale-95  rounded-t-lg hover:z-60 z-10 rounded-b-lg mr-3  bg-[#242424] flex flex-col cursor-pointer '>
   
    <div className='h-[169px]  w-[304px]  '>
- <img className=' h-full  w-full bg-cover   brightness-140 rounded-t-lg contrast-100'  src={props.img} alt={props.name} />
+ <img loading="lazy" className=' h-full  w-full bg-cover   brightness-140 rounded-t-lg contrast-100'  src={props.img} alt={props.name} />
     </div>
    
     

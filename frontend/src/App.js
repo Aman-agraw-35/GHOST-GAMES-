@@ -126,7 +126,7 @@ const placeholderCards = Array.from({ length: 12 }, (_, index) => (
 	
 	<video className='w-full h-full  bg-cover object-fill flex bg-center absolute' muted  autoPlay src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4#t=2,10" >
 	</video>
-  <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" className="left-[50%] top-[50%]" style={{color: "#fff",position : "relative" , height : "50px" , width: " 50px"}} />
+  <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" className="left-[49%] top-[48%]" style={{color: "#fff",position : "relative" , height : "50px" , width: " 50px"}} />
 </div>
  :
     <div className="h-[4260px] w-full bg-[#2e1351]  scroll-smooth ">
@@ -157,9 +157,9 @@ const placeholderCards = Array.from({ length: 12 }, (_, index) => (
           </div>
         </div>
         {(istrue === false)? <div>
-            {ist === true?  <div onClick={() => setist(false)} className="  w-max p-2 px-4 m-2 mr-8 justify-center items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img className= 'h-12 w-12 cursor-pointer mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div></div> </div>
+            {ist === true?  <div onClick={() => setist(false)} className="  w-max p-2 px-4 m-2 mr-8 justify-center items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img loading="lazy" className= 'h-12 w-12 cursor-pointer mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div></div> </div>
               
-              : <div className="float-right z-60 bg-[#222023c0]  w-max p-2 px-4 mr-12 justify-center  my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
+              : <div className="float-right z-60 bg-[#222023c0]  w-max p-2 px-4 mr-12 justify-center  my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img  loading="lazy"onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
             
               {/* <button  className="text-sm text-white " > Logout </button> */}
             </div></div>} </div>  : <div></div>}
@@ -168,6 +168,7 @@ const placeholderCards = Array.from({ length: 12 }, (_, index) => (
       <div className="w-full z-50  h-[100vh]">
         <div className="absolute z-20 w-full h-full bg-[rgba(0,0,0,.44)]"></div>
         <img
+          loading="lazy"
           className="absolute z-10 object-fill w-full h-full"
           src="https://wallpapers.com/images/hd/3840-x-1080-gaming-8z2jwjo8i0zpjlxo.jpg"
           alt="bg img"

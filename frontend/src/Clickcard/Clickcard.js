@@ -19,7 +19,7 @@ function Clickcard(){
           })
           .catch(error => {
           });
-      }, [page]);
+      }, []);
     
     
     return(
@@ -61,7 +61,7 @@ function Clickcard(){
           <div className="h-auto w-auto z-10">
             <div className="w-full min-h-fit z-60 relative pt-24 items-center xl:px-[8%] flex flex-col xl:flex-row xl:h-[550px] xl:w-full">
               <div className="h-[418px] w-[600px]">
-                <img className="cover w-full h-full rounded-xl border-2" src={page.thumbnail} alt={page.title} />
+                <img  loading="lazy" className="cover w-full h-full rounded-xl border-2" src={page.thumbnail} alt={page.title} />
               </div>
               <div className="h-[418px] w-[600px] justify-left flex flex-col xl:justify-center">
                 <div className="h-auto wfull px-8 items-center justify-center flex xl:justify-start">
@@ -138,7 +138,7 @@ function Clickcard(){
               <>
                 {page.screenshots.slice(1, 5).map((data, index) => (
                   <div key={index} className="h-[30vh] xl:h-[95vh] w-full py-16 px-32">
-                    <img className="rounded-xl bg-cover h-full fill w-full border-2" src={data.image} alt="" />
+                    <img loading="lazy" className="rounded-xl bg-cover h-full fill w-full border-2" src={data.image} alt="" />
                   </div>
                 ))}
               </>
