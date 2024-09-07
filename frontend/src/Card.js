@@ -10,10 +10,15 @@ function Card(props){
 
      async function handleClick(){
       setId(props.id );
-       await axios.post('https://ghost-games-dbup.vercel.app/datas', {id} );
-       if(id !== ""){
-      navigate('/game');
-       }
+       await axios.post('https://ghost-games-dbup.vercel.app/datas', {id : props.id } )
+       .then((id) => {
+           if(id !== ""){
+          navigate('/game');
+           }
+     }).catch((error) =>{
+      console.log(error) ;
+     })
+ 
 
     }
     

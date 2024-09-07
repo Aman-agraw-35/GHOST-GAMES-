@@ -19,7 +19,7 @@ function Clickcard(){
           })
           .catch(error => {
           });
-      }, []);
+      }, [page]);
     
     
     return(
