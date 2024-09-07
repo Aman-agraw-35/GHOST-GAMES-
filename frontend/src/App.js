@@ -70,7 +70,7 @@ function App() {
       }else{
         setistrue(true);
       }
-    },[mainUser]);
+    });
 
   const handleDragStart = (e) => e.preventDefault();
 
