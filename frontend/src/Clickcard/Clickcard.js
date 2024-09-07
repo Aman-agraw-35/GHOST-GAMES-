@@ -126,6 +126,9 @@ function Clickcard(){
             <h1 className="text-xl text-[#fff]">{page.description}</h1>
           </div>
         )}
+    <div className='w-full h-auto flex justify-center '>
+      <button  className='w-80 h-40 flex rounded-xl text-6xl justify-center items-center shadow-xl shadow-[#93BFCF]  my-12  font-extrabold text-[#541690] bg-[#7fb]  hover:bg-[#F3FA4F] hover:shadow-[#93b064] mb-40' > <a href={page.game_url}>Download</a> </button>
+    </div>
 
         {/* Screenshots Section */}
         {loading ? (
