@@ -13,6 +13,7 @@ function App() {
   const navigate = useNavigate();
   const [loadingCards, setLoadingCards] = useState(true);
   const [page1, setPage1] = useState(true);
+  let dataUser ="" ;
 
 
 
@@ -43,21 +44,25 @@ function App() {
   const [ist, setist] = useState(true);
 
  
-  axios.get('https://ghost-games-3.onrender.com/p')
-  .then((response) => {
-    console.log(mainUser);
-    setMainuser(response.data);
-    if(mainUser !== ""){
-      setistrue(false);
-    }else{
-      setistrue(true);
-    }
-  
-  })
-  .catch((error) => {
-    console.error('Error retrieving data:', error);
-  });
+    useEffect(() => {
+    axios.get('https://ghost-games-dbup.vercel.app/p')
+      .then((response) => {
+        dataUser = response.data ;
 
+        setMainuser(dataUser);
+        console.log(mainUser);
+
+        if(mainUser !== ""){
+          setistrue(false);
+        }else{
+          setistrue(true);
+        }
+      
+      },[mainUser])
+      .catch((error) => {
+        console.error('Error retrieving data:', error);
+      });
+    }, [mainUser]) ; 
 
   const handleDragStart = (e) => e.preventDefault();
 
