@@ -38,7 +38,6 @@ function Loginpage2() {
       // Display an alert message based on the backend response
       if (response?.data?.message === 'Login successful') {
         localStorage.setItem('authToken', response.data.token);
-        alert('Login successful');
         navigate("/");
       } else {
         alert(response?.data?.message || "Login failed");
