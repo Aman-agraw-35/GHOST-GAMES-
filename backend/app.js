@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 
 const app = express();
 const PORT = 8000;
-const JWT_SECRET = 'your_jwt_secret'; // Replace with a strong secret key
+const JWT_SECRET = 'your_jvdfvbrvrtvrvwt_secret'; // Replace with a strong secret key
 
 // MongoDB connection
 mongoose.connect("mongodb+srv://aman:hehe@cluster0.v6ixzty.mongodb.net/ghostuser", { useNewUrlParser: true, useUnifiedTopology: true });
@@ -25,7 +25,7 @@ const saltRounds = 10;
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://ghost-games-jade.vercel.app/',
   credentials: true
 }));
 
