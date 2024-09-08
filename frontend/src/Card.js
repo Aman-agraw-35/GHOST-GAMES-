@@ -8,19 +8,22 @@ function Card(props){
      const navigate = useNavigate();
 
 
-     async function handleClick(){
-      setId(props.id );
-       await axios.post('https://ghost-games-dbup.vercel.app/datas', {id : props.id } )
-       .then((id) => {
-           if(id !== ""){
+     async function handleClick() {
+      setId(props.id);
+    
+      try {
+        const response = await axios.post('https://ghost-games-dbup.vercel.app/datas', { id: props.id });
+    
+        if (response.data) {
           navigate('/game');
-           }
-     }).catch((error) =>{
-      console.log(error) ;
-     })
- 
-
+        } else {
+          console.log("No data received for the game ID");
+        }
+      } catch (error) {
+        console.error('Error fetching game data:', error);
+      }
     }
+    
     
 
 return(

@@ -14,6 +14,7 @@ function Clickcard(){
       useEffect(() => {
         axios.get('https://ghost-games-dbup.vercel.app/api')
           .then(response => {
+            console.log(response)
             setPage(response.data);
             setLoading(false); 
           })

@@ -8,13 +8,13 @@ function Loginpage1(){
   
 
   const [truth, settruth] = useState(true);
-  const [name , setName ] =useState('');
+  const [email , setEmail ] =useState('');
   const [password , setPassword ] =useState('');
   const navigate = useNavigate();
  
 
  function handleChange(event){
-  setName(
+  setEmail(
      event.target.value
   );
 }
@@ -28,18 +28,20 @@ function handleChang(event){
 
  
   async function handleClick(event){
-    setName(name);
+    setEmail(email);
     setPassword(password);
   event.preventDefault();
-  if(name !==  "" && password !== "" ){
+  if(email !==  "" && password !== "" ){
 
   try {
-    const response =  await axios.post('https://ghost-games-dbup.vercel.app/data', {name , password });
+    const response =  await axios.post('https://ghost-games-dbup.vercel.app/signup', {email , password });
     console.log(response.data.message);
    if(response.data.message === "Alreadyuser"){
     settruth(false);
    }
    else{
+    const token = response.data.token; 
+    localStorage.setItem('authToken', token); 
     navigate("/");
    }
   } catch (error) {

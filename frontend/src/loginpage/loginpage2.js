@@ -1,56 +1,57 @@
-//...........................................................login.............................................................................
-import React, { useEffect ,useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function Loginpage2(){ 
-
-  const [userrr, setUser] = useState(' ');
-  const [inpass , setinpass] = useState(false);
-    const [learn ,setlearn] =useState(false);
-
- 
-  
-  const [pass , setpass ] =useState('');
+function Loginpage2() {
+  const [userrr, setUser] = useState('');
+  const [inpass, setInpass] = useState(false);
+  const [learn, setLearn] = useState(false);
+  const [pass, setPass] = useState('');
   const navigate = useNavigate();
- 
 
- function handleChange(event){
-  setUser(
-     event.target.value
-  );
-}
+  // Handlers for form inputs
+  function handleChange(event) {
+    setUser(event.target.value);
+  }
 
-function handleChang(event){
-  setpass(
-     event.target.value
-  );
-}
-function handle(event){
-  setlearn(true);
-  event.preventDefault();
-}
+  function handleChang(event) {
+    setPass(event.target.value);
+  }
 
- 
-  async function handleClick(event){
+  function handle(event) {
+    setLearn(true);
     event.preventDefault();
-    setUser(userrr);
-    setpass(pass);
- 
-  if(userrr !==  "" && pass !== "" ){
+  }
 
-  try {
-    const response =  await axios.post('https://ghost-games-dbup.vercel.app/datasppp',{email : {userrr} , password : {pass}} );
-    if(response?.data?.message === 'found user' ){
-      navigate("/");
+  // Handle the login logic
+  async function handleClick(event) {
+    event.preventDefault();
+  
+    try {
+      const response = await axios.post('https://ghost-games-dbup.vercel.app/login', {
+        email: userrr,
+        password: pass,
+      });
+  
+      console.log(response.data);
+  
+      // Display an alert message based on the backend response
+      if (response?.data?.message === 'Login successful') {
+        localStorage.setItem('authToken', response.data.token);
+        alert('Login successful');
+        navigate("/");
+      } else {
+        alert(response?.data?.message || "Login failed");
+        setInpass(true);
+      }
+    } catch (error) {
+      if (error.response) {
+        alert(error.response?.data?.message || "Login failed");
+      } else {
+        alert("An error occurred while logging in");
+      }
+      console.error('Error during login:', error);
     }
-  else{
-    setinpass(true);
-  }
-  } catch (error) {
-    console.error('Error submitting email:', error);
-  }
-}
   }
   
   

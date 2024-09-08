@@ -314,3 +314,7 @@ z-index: 1000;
     font-size: 13px !important ;
   text-decoration: none;
   }
+
+  .react-hot-toast {
+    z-index: 9999; /* Ensure this is higher than other z-index values */
+  }

@@ -7,63 +7,110 @@ import Footer from "./footer";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import{faSpinner} from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-hot-toast'; 
 
 function App() {
   const [load , setLoad ] =useState(true);
   const navigate = useNavigate();
   const [loadingCards, setLoadingCards] = useState(true);
   const [page1, setPage1] = useState(true);
-  let dataUser ="" ;
 
 
 
-
+  useEffect(() => {
+    toast.success('Test toast');
+  }, []);
+  
 
   useEffect(() => {
     axios
       .get("https://ghost-games-dbup.vercel.app/api/filter")
       .then((response) => {
-        setPage1(response.data);
+        setPage1(response?.data);
         setLoadingCards(false); 
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  },[]);
 
   setTimeout(function(){
     setLoad(false);
   }, 4000);
 
-  const [mainUser, setMainuser] = useState('');
+  const [mainUser, setMainUser] = useState('');
   
-  const [istrue, setistrue] = useState(true);
+  const [istrue, setIsTrue] = useState(true);
   
 
 
   const [ist, setist] = useState(true);
 
  
-    useEffect(() => {
-    axios.get('https://ghost-games-dbup.vercel.app/p')
+
+  useEffect(() => {
+    console.log("Starting request to /profile");
+    const token = localStorage.getItem('authToken'); // Retrieve the token
+
+    if (!token) {
+      console.log("No token found, user not logged in");
+      setIsTrue(true); // No token, so still assume not logged in
+      return;
+    }
+
+    // Make request to /profile endpoint
+    axios.get('https://ghost-games-dbup.vercel.app/profile', {
+      headers: {
+        Authorization: `Bearer ${token}`, // Pass token in Authorization header
+      },
+      withCredentials: true
+    })
       .then((response) => {
-        dataUser = response?.data ;
+        const dataUser = response?.data?.user || ""; // Get user email from response
+        console.log("Response received:", response.data); // Log the full response data
+        console.log("Extracted user from response:", dataUser); // Log extracted user
 
-        setMainuser(dataUser);
-        console.log(mainUser);
+        // Show toast notification with the response message
+        toast.success(response.data.message);
 
-        if(mainUser !== ""){
-          setistrue(false);
-        }else{
-          setistrue(true);
+        // Update the state with the fetched email
+        setMainUser(dataUser);
+        console.log("User set in state:", dataUser); // Confirm user is set
+
+        // If user exists, set isTrue to false (meaning logged in successfully)
+        if (dataUser !== "") {
+          setIsTrue(false); // User logged in, so set to false
+          console.log("User is logged in, isTrue set to false");
+        } else {
+          setIsTrue(true); // No user exists, so still assume not logged in
+          console.log("No user found, isTrue set to true");
         }
-      
       })
       .catch((error) => {
-        console.error('Error retrieving data:', error);
+        console.error('Error retrieving user data:', error); // Log any errors
+        toast.error('Error retrieving user data. Please try again.');
+        setIsTrue(true); // Assume not logged in on error
       });
-    }, [mainUser]) ; 
+  }, []);
+   
+  const handleLogout = async () => {
+    try {
+      // Send a request to the backend to inform that the user is logging out (optional)
+      await axios.post('http://localhost:8000/logout', {}, { withCredentials: true });
 
+      // Clear the token from localStorage
+      localStorage.removeItem('authToken');
+      
+      // Show a success message using toast
+      toast.success('Logout successful');
+
+      // Redirect to the login page (or home)
+      navigate('/login');
+    } catch (error) {
+      console.error('Error during logout:', error);
+      toast.error('Error logging out. Please try again.');
+    }
+  };
   const handleDragStart = (e) => e.preventDefault();
 
 const placeholderCards = Array.from({ length: 12 }, (_, index) => (
@@ -157,12 +204,38 @@ const placeholderCards = Array.from({ length: 12 }, (_, index) => (
           </div>
         </div>
         {(istrue === false)? <div>
-            {ist === true?  <div onClick={() => setist(false)} className="  w-max p-2 px-4 m-2 mr-8 justify-center items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img loading="lazy" className= 'h-12 w-12 cursor-pointer mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div></div> </div>
-              
-              : <div className="float-right z-60 bg-[#222023c0]  w-max p-2 px-4 mr-12 justify-center  my-2 items-center border-1 border-black rounded-lg mb-4 flex flex-col"> <img  loading="lazy"onClick={() => setist(true)} className= 'h-12 cursor-pointer w-12 mb-2 bg-cover rounded-[100%] border-2 border-white brightness-100 ' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU" alt="" /><div> <h1 className="text-xs font-semibold text-yellow-200 ">{mainUser}</h1></div> <div className=" m-1.5 px-1.5 font-normal border-[2px] rounded-md  border-black-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] "> 
-            
-              {/* <button  className="text-sm text-white " > Logout </button> */}
-            </div></div>} </div>  : <div></div>}
+          {ist ? (
+  <div onClick={() => setist(false)} className="w-max z-50 p-2 px-4 m-2 mr-8 justify-center items-center  rounded-lg mb-4 flex flex-col">
+    <img
+      loading="lazy"
+      className="h-12 w-12 cursor-pointer mb-2 bg-cover rounded-full border-2 border-white brightness-100"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU"
+      alt="User"
+    />
+  </div>
+) : (
+  <div className="float-right relative z-50 bg-[#222023c0] w-max p-2 px-4 mr-12 justify-center my-2 items-center rounded-lg mb-4 flex flex-col">
+    <img
+      loading="lazy"
+      onClick={() => setist(true)}
+      className="h-12 cursor-pointer w-12 mb-2 bg-cover rounded-full border-2 border-white brightness-100"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU"
+      alt="User"
+    />
+    <div>
+      <h1 className="text-xs font-semibold text-yellow-200">{mainUser}</h1>
+    </div>
+    <div className="m-1.5  font-normal rounded-md border-black">
+      <button
+        onClick={handleLogout}
+        className="text-sm cursor-pointer z-60 text-white px-3 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg hover:bg-gradient-to-br hover:shadow-xl transition-all duration-300"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+)}
+ </div>  : <div></div>}
       </div>
 
       <div className="w-full z-50  h-[100vh]">
@@ -174,7 +247,7 @@ const placeholderCards = Array.from({ length: 12 }, (_, index) => (
           alt="bg img"
         />
 
- <div className="w-full h-[100vh] z-30 relative  px-28  pt-8 ">
+ <div className="w-full h-[100vh] z-20 relative  px-28  pt-8 ">
  {istrue === true ? <div className="h-auto w-auto flex float-right text-[#4fd2e3] text-xl justify-center items-center pb-8 ">
             <div className=" mr-5  px-1.5 font-semibold rounded-md border-2 border-cyan-300 #8c929d hover:bg-[rgba(120,120,120,0.2)]">
               <button
