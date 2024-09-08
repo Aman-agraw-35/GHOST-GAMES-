@@ -25,7 +25,7 @@ const saltRounds = 10;
 
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'https://ghost-games-jade.vercel.app/',
+  origin: 'https://ghost-games-jade.vercel.app',
   credentials: true
 }));
 
