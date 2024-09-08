@@ -96,7 +96,7 @@ function App() {
   const handleLogout = async () => {
     try {
       // Send a request to the backend to inform that the user is logging out (optional)
-      await axios.post('http://localhost:8000/logout', {}, { withCredentials: true });
+      await axios.post('https://ghost-games-dbup.vercel.app/logout', {}, { withCredentials: true });
 
       // Clear the token from localStorage
       localStorage.removeItem('authToken');
