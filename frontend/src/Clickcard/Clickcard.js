@@ -35,7 +35,7 @@ function Clickcard(){
   </div>
 </div>
           </div>
-          <div className=' fit-h-max w-auto'>{page.screenshots && page.screenshots.length >= 3 && (<img className='absolute flex brightness-50 fill w-full h-[845.1px] opacity-90 ' src={page.screenshots[0].image} alt="" />   )}
+          <div className=' fit-h-max w-auto'>{page.screenshots && page.screenshots.length >= 3 && (<img className='absolute flex brightness-50 fill w-full h-[845.1px] opacity-90 ' loading="lazy" src={page.screenshots[0].image} alt="" />   )}
 </div>
         </ParallaxLayer>
 
