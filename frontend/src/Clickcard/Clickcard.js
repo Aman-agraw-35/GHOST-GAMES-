@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import{faWindows , faChrome } from '@fortawesome/free-brands-svg-icons';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax';
-import Footer from '../footer';
+import Footer from "../footer.js";
 import './ClickcardPlaceholder.css';
 
 function Clickcard(){
@@ -42,7 +42,7 @@ function Clickcard(){
         
 
         <ParallaxLayer offset={0.6} speed={0.70} style={{ top: '-550px', left: '0', height: '200%' }}>
-      <div className="animation_layer parallax top-[-1000px] xl:top-0" id="art">
+      <div className="animation_layer parallax top-[-1000px] lg:top-0" id="art">
 
         {/* Main Image Section */}
         {loading ? (
@@ -133,7 +133,7 @@ function Clickcard(){
 
         {/* Screenshots Section */}
         {loading ? (
-          <div className="w-full h-auto py-16 px-32">
+          <div className="w-full h-auto xl:py-16 px-32">
             <div className="h-[30vh] bg-gray-700 animate-pulse rounded-xl w-full"></div>
           </div>
         ) : (
@@ -141,7 +141,7 @@ function Clickcard(){
             {page.screenshots && page.screenshots.length >= 2 && (
               <>
                 {page.screenshots.slice(1, 5).map((data, index) => (
-                  <div key={index} className="h-[30vh] xl:h-[95vh] w-full py-16 px-32">
+                  <div key={index} className="h-[15vh] lg:h-[85vh] w-full lg:py-16 py-4  px-32">
                     <img loading="lazy" className="rounded-xl bg-cover h-full fill w-full border-2" src={data.image} alt="" />
                   </div>
                 ))}

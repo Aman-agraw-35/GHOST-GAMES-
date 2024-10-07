@@ -1,152 +1,121 @@
 import React, { useState, useEffect } from "react";
-import Card from "./Card";
 import axios from "axios";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
-import Footer from "./footer";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import{faSpinner} from '@fortawesome/free-solid-svg-icons';
-import { toast } from 'react-hot-toast'; 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-hot-toast";
+import CarouselSection from "./CarouselSection";
+import Footer from "./footer";
+import { Search } from "lucide-react";
 
 function App() {
-  const [load , setLoad ] =useState(true);
+  const [load, setLoad] = useState(true);
   const navigate = useNavigate();
   const [loadingCards, setLoadingCards] = useState(true);
-  const [page1, setPage1] = useState(true);
-
-
+  const [page1, setPage1] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    toast.success('Test toast');
+    toast.success("Test toast");
   }, []);
-  
 
   useEffect(() => {
+    handleLoadOnce();
     axios
-      .get("https://ghost-games-dbup.vercel.app/api/filter")
+      .get("https://ghost-games-dbup.vercel.app/filter")
       .then((response) => {
         setPage1(response?.data);
-        setLoadingCards(false); 
+        setLoadingCards(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  },[]);
+  }, []);
 
-  setTimeout(function(){
-    setLoad(false);
-  }, 4000);
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
-  const [mainUser, setMainUser] = useState('');
-  
+  const handleLoadOnce = () => {
+    const hasLoadedBefore = localStorage.getItem("hasLoadedOnce");
+
+    if (!hasLoadedBefore) {
+      setTimeout(() => {
+        setLoad(false);
+        localStorage.setItem("hasLoadedOnce", true);
+      }, 4000);
+    } else {
+      setLoad(false);
+    }
+  };
+
+  const filteredItems = page1.filter((item) =>
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const [mainUser, setMainUser] = useState("");
   const [istrue, setIsTrue] = useState(true);
-  
-
-
   const [ist, setist] = useState(true);
-
- 
 
   useEffect(() => {
     console.log("Starting request to /profile");
-    const token = localStorage.getItem('authToken'); // Retrieve the token
+    const token = localStorage.getItem("authToken");
 
     if (!token) {
       console.log("No token found, user not logged in");
-      setIsTrue(true); // No token, so still assume not logged in
+      setIsTrue(true);
       return;
     }
 
-    // Make request to /profile endpoint
-    axios.get('https://ghost-games-dbup.vercel.app/profile', {
-      headers: {
-        Authorization: `Bearer ${token}`, // Pass token in Authorization header
-      },
-      withCredentials: true
-    })
+    axios
+      .get("https://ghost-games-dbup.vercel.app/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      })
       .then((response) => {
-        const dataUser = response?.data?.user || ""; // Get user email from response
-        console.log("Response received:", response.data); // Log the full response data
-        console.log("Extracted user from response:", dataUser); // Log extracted user
+        const dataUser = response?.data?.user || "";
+        console.log("Response received:", response.data);
+        console.log("Extracted user from response:", dataUser);
 
-        // Show toast notification with the response message
         toast.success(response.data.message);
 
-        // Update the state with the fetched email
         setMainUser(dataUser);
-        console.log("User set in state:", dataUser); // Confirm user is set
+        console.log("User set in state:", dataUser);
 
-        // If user exists, set isTrue to false (meaning logged in successfully)
         if (dataUser !== "") {
-          setIsTrue(false); // User logged in, so set to false
+          setIsTrue(false);
           console.log("User is logged in, isTrue set to false");
         } else {
-          setIsTrue(true); // No user exists, so still assume not logged in
+          setIsTrue(true);
           console.log("No user found, isTrue set to true");
         }
       })
       .catch((error) => {
-        console.error('Error retrieving user data:', error); // Log any errors
-        toast.error('Error retrieving user data. Please try again.');
-        setIsTrue(true); // Assume not logged in on error
+        console.error("Error retrieving user data:", error); // Log any errors
+        toast.error("Error retrieving user data. Please try again.");
+        setIsTrue(true);
       });
   }, []);
-   
+
   const handleLogout = async () => {
     try {
-      // Send a request to the backend to inform that the user is logging out (optional)
-      await axios.post('https://ghost-games-dbup.vercel.app/logout', {}, { withCredentials: true });
+      await axios.post(
+        "https://ghost-games-dbup.vercel.app/logout",
+        {},
+        { withCredentials: true }
+      );
 
-      // Clear the token from localStorage
-      localStorage.removeItem('authToken');
-      
-      // Show a success message using toast
-      toast.success('Logout successful');
-
-      // Redirect to the login page (or home)
-      navigate('/login');
+      localStorage.removeItem("authToken");
+      toast.success("Logout successful");
+      navigate("/login");
     } catch (error) {
-      console.error('Error during logout:', error);
-      toast.error('Error logging out. Please try again.');
+      console.error("Error during logout:", error);
+      toast.error("Error logging out. Please try again.");
     }
   };
   const handleDragStart = (e) => e.preventDefault();
-
-const placeholderCards = Array.from({ length: 12 }, (_, index) => (
-  <div
-    key={index}
-    className="h-[300px] w-[304px] hover:scale-95 rounded-t-lg hover:z-60 z-10 rounded-b-lg mr-3 bg-[#242424] flex flex-col cursor-pointer animate-pulse"
-  >
-    {/* Image Placeholder */}
-    <div className="h-[169px] w-[304px] bg-gray-600 rounded-t-lg"></div>
-    
-    {/* Content Placeholder */}
-    <div className="w-[304px] h-[131px] py-0.5 px-1.5 flex flex-col justify-between">
-      <div className="w-full">
-        {/* Rating Placeholder */}
-        <div className="w-20 h-4 bg-gray-500 rounded float-right mt-1"></div>
-      </div>
-      
-      {/* Title Placeholder */}
-      <div className="h-6 bg-gray-500 rounded w-3/4 my-1"></div>
-      
-      <div className="absolute bottom-1">
-        {/* Platform & Free Placeholder */}
-        <div className="flex flex-row gap-3">
-          <div className="h-4 w-16 bg-gray-500 rounded"></div>
-          <div className="h-4 w-10 bg-gray-500 rounded"></div>
-        </div>
-        
-        {/* Released & Developer Placeholders */}
-        <div className="h-4 w-32 bg-gray-500 rounded mt-1"></div>
-        <div className="h-4 w-40 bg-gray-500 rounded mt-1"></div>
-      </div>
-    </div>
-  </div>
-));
-
-
   const responsive = {
     2000: {
       items: 10,
@@ -165,77 +134,116 @@ const placeholderCards = Array.from({ length: 12 }, (_, index) => (
     },
   };
 
-
-  return (
-
-   (load===true)? <div className="w-full h-[100vh] bg-black overflow-hidden bg-center">
-	
-	
-	<video className='w-full h-full  bg-cover object-fill flex bg-center absolute' muted  autoPlay src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4#t=2,10" >
-	</video>
-  <FontAwesomeIcon icon={faSpinner} spin spinReverse size="2xl" className="left-[49%] top-[48%]" style={{color: "#fff",position : "relative" , height : "50px" , width: " 50px"}} />
-</div>
- :
-    <div className="h-[4260px] w-full bg-[#2e1351]  scroll-smooth ">
+  return load === true ? (
+    <div className="w-full h-[100vh] bg-black overflow-hidden bg-center">
+      <video
+        className="w-full h-full  bg-cover object-fill flex bg-center absolute"
+        muted
+        autoPlay
+        src="https://static.moewalls.com/videos/preview/2023/ghost-call-of-duty-modern-warfare-ii-preview.mp4#t=2,10"
+      ></video>
+      <FontAwesomeIcon
+        icon={faSpinner}
+        spin
+        spinReverse
+        size="2xl"
+        className="left-[49%] top-[48%]"
+        style={{
+          color: "#fff",
+          position: "relative",
+          height: "50px",
+          width: " 50px",
+        }}
+      />
+    </div>
+  ) : (
+    <div className="h-[4860px] w-full bg-[#2e1351]  scroll-smooth ">
       <div className="relative  backdrop-opacity-10 z-30 bg-[#171d25] h-20 w-full flex border-b-2 border-b-black ">
         <div className="w-24 h-full pl-32 float-left justify-center items-center  flex ">
-          <a href="#" className="text-5xl  xl:text-6xl float-left  tracking-widest font-bold font-sans subpixel-antialiased text-cyan-300" > Ghost </a>
-        </div >
+          <a
+            href="#"
+            className="text-5xl  xl:text-6xl float-left  tracking-widest font-bold font-sans subpixel-antialiased text-cyan-300"
+          >
+            {" "}
+            Ghost{" "}
+          </a>
+        </div>
         <div className=" flex float-none h-full w-full ">
           <div className=" h-full  justify-center  items-center  pr-7 ml-auto flex ">
-            <a href="#shoot" className=" text-xl hover:underline hover:text-[#46f3cb] font-bold text-[#9bffe8]">
+            <a
+              href="#shooting"
+              className=" text-xl hover:underline hover:text-[#46f3cb] font-bold text-[#9bffe8]"
+            >
               SHOOTING
             </a>
           </div>
           <div className="w-24 h-full  justify-center items-center pr-7 flex ">
-            <a href="#card" className=" text-xl hover:underline hover:text-[#46f3cb] font-bold text-[#9bffe8]">
+            <a
+              href="#card"
+              className=" text-xl hover:underline hover:text-[#46f3cb] font-bold text-[#9bffe8]"
+            >
               CARD
             </a>
           </div>
           <div className=" h-full  justify-center items-center pr-7 flex ">
-            <a href="#sports" className=" text-xl  hover:underline hover:text-[#46f3cb] font-bold text-[#9bffe8]">
+            <a
+              href="#sports"
+              className=" text-xl  hover:underline hover:text-[#46f3cb] font-bold text-[#9bffe8]"
+            >
               SPORTS
             </a>
           </div>
           <div className=" h-full  justify-center items-center pr-7 flex  mr-auto ">
-            <a href="#battle" className=" text-xl hover:underline hover:text-[#46f3cb] font-bold text-[#9bffe8]">
+            <a
+              href="#Battle"
+              className=" text-xl hover:underline hover:text-[#46f3cb] font-bold text-[#9bffe8]"
+            >
               BATTLE ROYALE
             </a>
           </div>
         </div>
-        {(istrue === false)? <div>
-          {ist ? (
-  <div onClick={() => setist(false)} className="w-max z-50 p-2 px-4 m-2 mr-8 justify-center items-center  rounded-lg mb-4 flex flex-col">
-    <img
-      loading="lazy"
-      className="h-12 w-12 cursor-pointer mb-2 bg-cover rounded-full border-2 border-white brightness-100"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU"
-      alt="User"
-    />
-  </div>
-) : (
-  <div className="float-right relative z-50 bg-[#222023c0] w-max p-2 px-4 mr-12 justify-center my-2 items-center rounded-lg mb-4 flex flex-col">
-    <img
-      loading="lazy"
-      onClick={() => setist(true)}
-      className="h-12 cursor-pointer w-12 mb-2 bg-cover rounded-full border-2 border-white brightness-100"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU"
-      alt="User"
-    />
-    <div>
-      <h1 className="text-xs font-semibold text-yellow-200">{mainUser}</h1>
-    </div>
-    <div className="m-1.5  font-normal rounded-md border-black">
-      <button
-        onClick={handleLogout}
-        className="text-sm cursor-pointer z-60 text-white px-3 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg hover:bg-gradient-to-br hover:shadow-xl transition-all duration-300"
-      >
-        Logout
-      </button>
-    </div>
-  </div>
-)}
- </div>  : <div></div>}
+        {istrue === false ? (
+          <div>
+            {ist ? (
+              <div
+                onClick={() => setist(false)}
+                className="w-max z-50 p-2 px-4 m-2 mr-8 justify-center items-center  rounded-lg mb-4 flex flex-col"
+              >
+                <img
+                  loading="lazy"
+                  className="h-12 w-12 cursor-pointer mb-2 bg-cover rounded-full border-2 border-white brightness-100"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU"
+                  alt="User"
+                />
+              </div>
+            ) : (
+              <div className="float-right relative z-50 bg-[#222023c0] w-max p-2 px-4 mr-12 justify-center my-2 items-center rounded-lg mb-4 flex flex-col">
+                <img
+                  loading="lazy"
+                  onClick={() => setist(true)}
+                  className="h-12 cursor-pointer w-12 mb-2 bg-cover rounded-full border-2 border-white brightness-100"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcWz-elAmN-LwWwHnJmwXYLs9PPQL7SGbdKrLBGxpCW8MSpjkan_TORzh2UlKQhqZqheA&usqp=CAU"
+                  alt="User"
+                />
+                <div>
+                  <h1 className="text-xs font-semibold text-yellow-200">
+                    {mainUser}
+                  </h1>
+                </div>
+                <div className="m-1.5  font-normal rounded-md border-black">
+                  <button
+                    onClick={handleLogout}
+                    className="text-sm cursor-pointer z-60 text-white px-3 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg hover:bg-gradient-to-br hover:shadow-xl transition-all duration-300"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
 
       <div className="w-full z-50  h-[100vh]">
@@ -247,384 +255,139 @@ const placeholderCards = Array.from({ length: 12 }, (_, index) => (
           alt="bg img"
         />
 
- <div className="w-full h-[100vh] z-20 relative  px-28  pt-8 ">
- {istrue === true ? <div className="h-auto w-auto flex float-right text-[#4fd2e3] text-xl justify-center items-center pb-8 ">
-            <div className=" mr-5  px-1.5 font-semibold rounded-md border-2 border-cyan-300 #8c929d hover:bg-[rgba(120,120,120,0.2)]">
-              <button
-                onClick={(x) => {
-                  navigate("/login");
-                }}
-              >
-                Login
-              </button>
+        <div className="w-full h-[100vh] z-20 relative  px-28  pt-8 ">
+          {istrue === true ? (
+            <div className="h-auto w-auto flex float-right text-[#4fd2e3] text-xl justify-center items-center pb-8 ">
+              <div className=" mr-5  px-1.5 font-semibold rounded-md border-2 border-cyan-300 #8c929d hover:bg-[rgba(120,120,120,0.2)]">
+                <button
+                  onClick={(x) => {
+                    navigate("/login");
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+              <div className=" mr-10 px-1.5 font-semibold border-2 rounded-md  border-cyan-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] ">
+                {" "}
+                <button
+                  onClick={(x) => {
+                    navigate("/signup");
+                  }}
+                >
+                  SignUp
+                </button>{" "}
+              </div>
             </div>
-            <div className=" mr-10 px-1.5 font-semibold border-2 rounded-md  border-cyan-300 #8c929d hover:bg-[rgba(120,120,120,0.2)] ">
-              {" "}
-              <button
-                onClick={(x) => {
-                  navigate("/signup");
-                }}
-              >
-                SignUp
-              </button>{" "}
-            </div></div>  :  null } 
-            
-   
-         
-          {/* <div className="mb-20 h-11 justify-center flex w-full ">
+          ) : null}
+
+          <div className="mb-20 h-11 justify-center flex w-full ">
             <div className="w-3/4  border-2 rounded-lg flex flex-row  items-center pl-3 bg-[rgba(120,120,120,0.5)] border-[#242424] h-full">
               <Search color="#8c929d" />
               <input
+                onChange={handleSearchChange}
                 className="h-full w-full text-white  bg-transparent placeholder:italic text-[whi] ml-2 pl-2 "
-                placeholder="Search 488,835 games"
+                placeholder="Search a game"
               ></input>
             </div>
-          </div> */}
-
-          <div className="h-17 pb-4 pt-4 w-full">
-            <h1 className="  text-3xl md:text-5xl text-[#AAC8A7] font-extrabold ">
-              {" "}
-              POPULAR GAMES{" "}
-            </h1>
           </div>
 
-          {loadingCards ? (
-  <div className="h-[299px] w-full justify-center flex mr-5 mb-28">
-    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
-  </div>
-) : (
-  page1.length > 0 && (
-    <div
-      onDragStart={handleDragStart}
-      role="presentation"
-      className="h-[299px] w-full justify-center flex mr-5 mb-28"
-    >
-      <AliceCarousel
-        mouseTracking
-        responsive={responsive}
-        items={page1.slice(0, 12).map((data) => (
-          <Card
-            key={data.id} // Always include a unique key for the mapped items
-            name={data.title}
-            img={data.thumbnail}
-            id={data.id}
-            released={data.release_date}
-            rating={data.genre}
-            publisher={data.developer}
-            platform={data.platform}
-          />
-        ))}
-      />
-    </div>
-  )
-)}
+          {searchQuery !== "" && (
+            <div className="">
+              <CarouselSection
+                title="SEARCH RESULTS"
+                items={filteredItems}
+                loading={loadingCards}
+                handleDragStart={handleDragStart}
+                responsive={responsive}
+              />
+            </div>
+          )}
 
-
-          <div className="h-17 pb-4 w-full">
-            <h1 className=" text-3xl md:text-5xl  text-[#AAC8A7] font-extrabold pt-6">
-              TRENDING GAMES
-            </h1>
-          </div>
-
-          {loadingCards ? (
-  <div className="h-[299px] w-full justify-center flex mr-5 mb-28">
-    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
-  </div>
-) : (
-  page1.length > 0 && (
-    <div
-      onDragStart={handleDragStart}
-      role="presentation"
-      className="h-[299px] w-full flex mr-5 mb-28"
-    >
-      <AliceCarousel
-        mouseTracking
-        responsive={responsive}
-        preventDefault
-        items={page1.slice(13, 24).map((data) => (
-          <Card
-            key={data.id}
-            name={data.title}
-            img={data.thumbnail}
-            id={data.id}
-            released={data.release_date}
-            rating={data.genre}
-            publisher={data.developer}
-            platform={data.platform}
-          />
-        ))}
-      />
-    </div>
-  )
-)}
-
-
-          <div className="h-17 pb-4 w-full">
-            <h1 className="   text-3xl md:text-5xl text-[#AAC8A7] font-extrabold pt-6 ">
-              GAMES YOU WILL LIKE
-            </h1>
-          </div>
-
-          {loadingCards ? (
-  <div className="h-[299px] w-full justify-center flex mr-5 mb-28">
-    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
-  </div>
-) : (
-  page1.length > 0 && (
-    <div
-      onDragStart={handleDragStart}
-      role="presentation"
-      className="h-[299px] w-full flex mr-5 mb-28"
-    >
-      <AliceCarousel
-        mouseTracking
-        responsive={responsive}
-        preventDefault
-        items={page1.slice(25, 36).map((data) => (
-          <Card
-            key={data.id}
-            name={data.title}
-            img={data.thumbnail}
-            id={data.id}
-            released={data.release_date}
-            rating={data.genre}
-            publisher={data.developer}
-            platform={data.platform}
-          />
-        ))}
-      />
-    </div>
-  )
-)}
-
-
-          <div className="h-17 pb-4 w-full">
-            <h1 className="   text-3xl md:text-5xl  text-[#AAC8A7] font-extrabold pt-6">
-              TOP PC GAMES
-            </h1>
-          </div>
-
-          {loadingCards ? (
-  <div className="h-[299px] w-full items-center flex mr-5 mb-28">
-    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
-  </div>
-) : (
-  page1.length > 0 && (
-    <div
-      onDragStart={handleDragStart}
-      role="presentation"
-      className="h-[299px] w-full items-center flex mr-5 mb-28"
-    >
-      <AliceCarousel
-        mouseTracking
-        responsive={responsive}
-        preventDefault
-        items={page1.slice(100, 120).map((data) => (
-          <Card
-            key={data.id}
-            name={data.title}
-            img={data.thumbnail}
-            id={data.id}
-            released={data.release_date}
-            rating={data.genre}
-            publisher={data.developer}
-            platform={data.platform}
-          />
-        ))}
-      />
-    </div>
-  )
-)}
-
-
-          <div className="h-17 pb-4 w-full">
-            <h1
-              className="   text-3xl md:text-5xl  text-[#AAC8A7] font-extrabold pt-6 "
-              id="shoot"
-            >
-              SHOOTING GAMES
-            </h1>
-          </div>
-
-          {loadingCards ? (
-  <div className="h-[299px] w-full flex mr-5 mb-28">
-    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
-  </div>
-) : (
-  page1.length > 0 && (
-    <div
-      onDragStart={handleDragStart}
-      role="presentation"
-      className="h-[299px] w-full flex mr-5 mb-28"
-    >
-      <AliceCarousel
-        mouseTracking
-        responsive={responsive}
-        preventDefault
-        items={page1
-          .filter((data) => data.genre === "Shooter")
-          .slice(0, 20)
-          .map((data) => (
-            <Card
-              key={data.id}
-              name={data.title}
-              img={data.thumbnail}
-              id={data.id}
-              released={data.release_date}
-              rating={data.genre}
-              publisher={data.developer}
-              platform={data.platform}
+          <div className="">
+            <CarouselSection
+              title="POPULAR GAMES"
+              items={page1.slice(0, 12)}
+              loading={loadingCards}
+              handleDragStart={handleDragStart}
+              responsive={responsive}
             />
-          ))}
-      />
-    </div>
-  )
-)}
-
-
-          <div className="h-17 pb-4 w-full">
-            <h1
-              className="   text-3xl md:text-5xl  text-[#AAC8A7] font-extrabold pt-6"
-              id="card"
-            >
-              CARD GAMES
-            </h1>
           </div>
-
-          {loadingCards ? (
-  <div className="h-[299px] w-full flex mr-5 mb-28">
-    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
-  </div>
-) : (
-  page1.length > 0 && (
-    <div
-      onDragStart={handleDragStart}
-      role="presentation"
-      className="h-[299px] w-full flex mr-5 mb-28"
-    >
-      <AliceCarousel
-        mouseTracking
-        responsive={responsive}
-        preventDefault
-        items={page1
-          .filter((data) => data.genre === "Card Game")
-          .slice(0, 15)
-          .map((data) => (
-            <Card
-              key={data.id}
-              name={data.title}
-              img={data.thumbnail}
-              id={data.id}
-              released={data.release_date}
-              rating={data.genre}
-              publisher={data.developer}
-              platform={data.platform}
+          <div className="">
+            <CarouselSection
+              title="TRENDING GAMES"
+              items={page1.slice(13, 24)}
+              loading={loadingCards}
+              handleDragStart={handleDragStart}
+              responsive={responsive}
             />
-          ))}
-      />
-    </div>
-  )
-)}
-
-
-          <div className="h-17 pb-4 w-full">
-            <h1
-              className="   text-3xl md:text-5xl  text-[#AAC8A7] font-extrabold pt-6 "
-              id="battle"
-            >
-              BATTLE ROYALE
-            </h1>
           </div>
-         
-          {loadingCards ? (
-  <div className="h-[299px] w-full flex mr-5 mb-28">
-    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
-  </div>
-) : (
-  page1.length > 0 && (
-    <div
-      onDragStart={handleDragStart}
-      role="presentation"
-      className="h-[299px] w-full flex mr-5 mb-28"
-    >
-      <AliceCarousel
-        mouseTracking
-        responsive={responsive}
-        preventDefault
-        items={page1
-          .filter((data) => data.genre === "Battle Royale")
-          .slice(0, 19)
-          .map((data) => (
-            <Card
-              key={data.id}
-              name={data.title}
-              img={data.thumbnail}
-              id={data.id}
-              released={data.release_date}
-              rating={data.genre}
-              publisher={data.developer}
-              platform={data.platform}
+          <div className="">
+            <CarouselSection
+              title="GAMES YOU WILL LIKE"
+              items={page1.slice(25, 36)}
+              loading={loadingCards}
+              handleDragStart={handleDragStart}
+              responsive={responsive}
             />
-          ))}
-      />
-    </div>
-  )
-)}
-
-
-          <div className="h-17 pb-4 w-full">
-            <h1
-              className="   text-3xl md:text-5xl  text-[#AAC8A7] font-extrabold pt-6"
-              id="sports"
-            >
-              SPORTS
-            </h1>
           </div>
-             <div className="bg-[#2e1351]  h-310">
-             {loadingCards ? (
-  <div className="h-[299px] w-full flex mr-5 mb-28">
-    <AliceCarousel mouseTracking responsive={responsive} items={placeholderCards} />
-  </div>
-) : (
-  page1.length > 0 && (
-    <div
-      onDragStart={handleDragStart}
-      role="presentation"
-      className="h-[299px] w-full flex mr-5 mb-28"
-    >
-      <AliceCarousel
-        mouseTracking
-        responsive={responsive}
-        preventDefault
-        items={page1
-          .filter((data) => data.genre === "Sports")
-          .slice(0, 20)
-          .map((data) => (
-            <Card
-              key={data.id}
-              name={data.title}
-              img={data.thumbnail}
-              id={data.id}
-              released={data.release_date}
-              rating={data.genre}
-              publisher={data.developer}
-              platform={data.platform}
+          <div className="">
+            <CarouselSection
+              title="TOP PC GAMES"
+              items={page1.slice(100, 120)}
+              loading={loadingCards}
+              handleDragStart={handleDragStart}
+              responsive={responsive}
             />
-          ))}
-      />
-    </div>
-  )
-)}
-
-             <Footer/>
-       </div>
+          </div>
+          <div className="" id="shooting">
+            <CarouselSection
+              title="SHOOTING GAMES"
+              items={page1
+                .filter((data) => data.genre === "Shooter")
+                .slice(0, 20)}
+              loading={loadingCards}
+              handleDragStart={handleDragStart}
+              responsive={responsive}
+            />
+          </div>
+          <div className="" id="card">
+            <CarouselSection
+              title="CARD GAMES"
+              items={page1
+                .filter((data) => data.genre === "Card Game")
+                .slice(0, 15)}
+              loading={loadingCards}
+              handleDragStart={handleDragStart}
+              responsive={responsive}
+            />
+          </div>
+          <div className="" id="Battle">
+            <CarouselSection
+              title="BATTLE ROYALE"
+              items={page1
+                .filter((data) => data.genre === "Battle Royale")
+                .slice(0, 19)}
+              loading={loadingCards}
+              handleDragStart={handleDragStart}
+              responsive={responsive}
+            />
+          </div>
+          <div className="" id="sports">
+            <CarouselSection
+              title="SPORTS"
+              items={page1
+                .filter((data) => data.genre === "Sports")
+                .slice(0, 20)}
+              loading={loadingCards}
+              handleDragStart={handleDragStart}
+              responsive={responsive}
+            />
+          </div>
+          <Footer />
         </div>
       </div>
-
-    </div> 
+    </div>
   );
-  
 }
 
 export default App;
-
