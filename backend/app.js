@@ -29,6 +29,8 @@ app.use(cors({
   credentials: true
 }));
 
+
+
 // Middleware to authenticate JWT
 const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers['authorization'];
