@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     handleLoadOnce();
     axios
-      .get("https://ghost-games-dbup.vercel.app/filter")
+      .get("https://ghost-games-dbup.vercel.app/api/filter")
       .then((response) => {
         setPage1(response?.data);
         setLoadingCards(false);
